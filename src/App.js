@@ -18,6 +18,7 @@ const App = () => {
         "cascade",
         "ripple",
         "staggeredBounce",
+        "warp",
       ],
     },
     speed: {

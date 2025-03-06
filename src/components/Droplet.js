@@ -66,6 +66,10 @@ const Droplet = React.forwardRef(
           targetY.current =
             Math.abs(Math.sin(t * 2 + (position[0] + position[2]) * 0.2)) * 2;
           break;
+        case "warp":
+          // Warp animation: rapid oscillation on the Y-axis
+          targetY.current = Math.sin(t * 10) * 2; // High-frequency sine wave
+          break;
         default:
           targetY.current = 0;
       }
