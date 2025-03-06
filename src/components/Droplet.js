@@ -10,16 +10,30 @@ const wireMaterial = new THREE.MeshLambertMaterial({
 });
 
 const Droplet = React.forwardRef(
-  ({ position, pattern, time, speed, userData }, ref) => {
+  ({ position, pattern, time, speed, userData, animateColor }, ref) => {
     const dropRef = useRef();
     const wireRef = useRef();
     const targetY = useRef(0);
     const patternRef = useRef(pattern); // Store the current pattern
+    const baubleMaterialRef = useRef(
+      new THREE.MeshLambertMaterial({
+        color: "#c0a0a0", // Original color
+        emissive: "blue",
+      })
+    );
+    const originalColorRef = useRef("#c0a0a0"); // Store the original color
 
     // Update patternRef when the pattern prop changes
     useEffect(() => {
       patternRef.current = pattern;
     }, [pattern]);
+
+    // Reset color to original when animateColor is false
+    useEffect(() => {
+      if (!animateColor) {
+        baubleMaterialRef.current.color.set(originalColorRef.current); // Reset to original color
+      }
+    }, [animateColor]);
 
     // Forward the dropRef to the parent
     React.useImperativeHandle(ref, () => dropRef.current);
@@ -95,6 +109,12 @@ const Droplet = React.forwardRef(
         wireRef.current.geometry.dispose(); // Dispose of the old geometry
         wireRef.current.geometry = newGeometry; // Assign the new geometry
       }
+
+      // Animate color if animateColor is true
+      if (animateColor) {
+        const hue = (Math.sin(t * 0.5) + 1) / 2; // Oscillate between 0 and 1
+        baubleMaterialRef.current.color.setHSL(hue, 1, 0.5); // Set HSL color
+      }
     });
 
     return (
@@ -105,7 +125,7 @@ const Droplet = React.forwardRef(
           scale={[1, 1, 1]}
           userData={userData}
         >
-          <Bauble scale={0.5} />
+          <Bauble material={baubleMaterialRef.current} scale={0.5} />
         </mesh>
         {/* Wire connecting the droplet to the ceiling */}
         <mesh ref={wireRef} material={wireMaterial}>
