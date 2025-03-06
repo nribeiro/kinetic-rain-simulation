@@ -1,9 +1,9 @@
 {
-  "name": "react",
+  "name": "kinetic-rain-simulation",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "main": "src/index.tsx",
+  "main": "src/index.js",
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -14,12 +14,6 @@
     "r3f-perf": "7.2.3",
     "leva": "0.10.0",
     "@chriscourses/perlin-noise": "1.0.6"
-  },
-  "devDependencies": {
-    "@types/react": "19.0.0",
-    "@types/react-dom": "19.0.0",
-    "loader-utils": "3.2.1",
-    "typescript": "5.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
