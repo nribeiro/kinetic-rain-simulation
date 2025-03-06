@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import Droplet from "./Droplet"; // Assuming Droplet is in a separate file
 import useWebSocket from "../hooks/useWebSocket"; // Custom WebSocket hook
 
-const KineticRain = ({ pattern, speed }) => {
+const KineticRain = ({ pattern, speed, animateColor }) => {
   const [gridSize, setGridSize] = useState({ rows: 30, cols: 12 });
   const refs = useRef([]);
   const socket = useWebSocket("ws://your-server-address");
@@ -53,6 +53,7 @@ const KineticRain = ({ pattern, speed }) => {
             pattern={pattern}
             time={timeOffset}
             speed={speed}
+            animateColor={animateColor} // Pass animateColor prop
             ref={(ref) => (refs.current[i] = ref)}
           />
         );

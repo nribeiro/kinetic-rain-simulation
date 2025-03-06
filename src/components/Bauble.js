@@ -8,14 +8,14 @@ const baubleMaterial = new THREE.MeshLambertMaterial({
 
 const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
 
-const Bauble = ({ scale }) => {
+const Bauble = ({ scale, material }) => {
   return (
     <mesh
       castShadow
       receiveShadow
       scale={scale}
       geometry={sphereGeometry}
-      material={baubleMaterial}
+      material={material}
     />
   );
 };

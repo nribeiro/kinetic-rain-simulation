@@ -5,9 +5,9 @@ import KineticRain from "./components/KineticRain";
 import Experience from "./components/Experience";
 
 const App = () => {
-  const { pattern, speed, stats } = useControls({
+  const { pattern, speed, stats, animateColor } = useControls({
     pattern: {
-      value: "wave",
+      value: "warp",
       options: [
         "wave",
         "spiral",
@@ -18,16 +18,20 @@ const App = () => {
         "cascade",
         "ripple",
         "staggeredBounce",
+        "warp",
       ],
     },
     speed: {
-      value: 1,
+      value: 0.1,
       min: 0,
       max: 2,
       step: 0.1,
     },
     stats: {
       value: true,
+    },
+    animateColor: {
+      value: false, // Toggle for color animation
     },
   });
 
@@ -42,7 +46,11 @@ const App = () => {
         onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
       >
         <Experience stats={stats}>
-          <KineticRain pattern={pattern} speed={speed} />
+          <KineticRain
+            pattern={pattern}
+            speed={speed}
+            animateColor={animateColor}
+          />
         </Experience>
       </Canvas>
     </>
